@@ -21,30 +21,35 @@ public class Cat {
 	private static final int MOUTH_Y = HEAD_DIMENSION/5 * 3;
 	
 	// draw will render the Cat on the Graphics object
-	public void draw(Graphics g, int catX, int catY)
+	public void draw(Graphics g, int catX, int catY, int scale, String dialouge)
 	{
 		Graphics2D g2 = (Graphics2D) g;
 		int x=catX;
 		int y=catY;
 		// Draw the head
 		g2.setColor(Color.yellow);
-		g2.fillOval(x, y, HEAD_DIMENSION, HEAD_DIMENSION);
+		g2.fillOval(x, y, HEAD_DIMENSION/scale, HEAD_DIMENSION/scale);
 		// Draw the eyes
 		g2.setColor(Color.blue);
-		x = catX + EYE_X; 
-		y = catY + EYE_Y;
-		g2.fillOval(x, y, EYE_WIDTH, EYE_HEIGHT);
-		x += EYE_SEPARATION;
-		g2.fillOval(x, y, EYE_WIDTH, EYE_HEIGHT);
+		x = catX + EYE_X/scale; 
+		y = catY + EYE_Y/scale;
+		g2.fillOval(x, y, EYE_WIDTH/scale, EYE_HEIGHT/scale);
+		x += EYE_SEPARATION/scale;
+		g2.fillOval(x, y, EYE_WIDTH/scale, EYE_HEIGHT/scale);
 		// Draw the mouth
 		g2.setColor(Color.pink);
-		x = catX + MOUTH_X;
-		y = catY + MOUTH_Y;
-		g2.fillOval(x, y, MOUTH_WIDTH, MOUTH_HEIGHT);
+		x = catX + MOUTH_X/scale;
+		y = catY + MOUTH_Y/scale;
+		g2.fillOval(x, y, MOUTH_WIDTH/scale, MOUTH_HEIGHT/scale);
 		g2.setColor(Color.black);
 		// Meow text appears below cat head, +10 places below 
 		// so it doesn't overlap the drawing
-		g2.drawString("KILL ME", catX, catY+HEAD_DIMENSION+10);	
-		g2.drawString("LIFE IS PAIN", catX, catY+HEAD_DIMENSION+20);	
+		if (dialouge.compareTo("") == 0) {
+			g2.drawString("KILL ME", catX, catY+HEAD_DIMENSION/scale+10);	
+			g2.drawString("LIFE IS PAIN", catX, catY+HEAD_DIMENSION/scale+20);
+		}
+		else {
+			g2.drawString(dialouge, catX, catY+HEAD_DIMENSION/scale+10);
+		}
 	}
 }
